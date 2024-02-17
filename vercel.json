@@ -8,8 +8,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "app.py",
-            "headers": [{"key": "Access-Control-Allow-Origin", "value": "*"}]
+            "dest": "app.py"
         }
     ]
 }
