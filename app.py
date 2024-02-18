@@ -4,6 +4,7 @@ from bson import ObjectId
 from dotenv import load_dotenv
 import os
 from flask_cors import CORS
+from random import randint
 
 load_dotenv()
 app = Flask(__name__)
@@ -105,6 +106,17 @@ def delete_data_by_id(id):
     result = collection.delete_one({"_id": ObjectId(id)})
 
     return jsonify({"message": "Data deleted successfully", "deleted_count": result.deleted_count})
+
+@app.route('/randomize', methods=['GET'])
+def randomize():
+    data = list(collection.find())
+
+    random = []
+
+    for i in range(0, len(data)):
+        random.append(data[i]["event"])
+
+    return jsonify({"data": random[randint(0, len(random))]})
 
 if __name__ == '__main__':
     # app.run(debug=True)
